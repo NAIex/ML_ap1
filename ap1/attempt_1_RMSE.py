@@ -8,31 +8,39 @@ from data import *
 def section(e , d):
     return np.array(list(filter(e,d)))
 
-d2019_2021_2022, _ = load_data([DATA_2019,DATA_2021,DATA_2022],{1,2,3,4,5,6,7,8,9,10,11,12})
-dlong, _ = load_data([DATA_2021, DATA_2022], {1,2,3,4,5,6,7,8,9,10,11,12})
-dfull, n = load_data([DATA_2022,DATA_2023], {1,2,3,4,5,6,7,8,9,10,11,12})
-d2023, _ = load_data([DATA_2023], {1,2,3,4,5,6,7,8,9,10,11,12})
-d2022, _ = load_data([DATA_2022], {1,2,3,4,5,6,7,8,9,10,11,12})
+months = {1,2,3,4,5,6,7,8,9,10,11,12}
+
+d2021_2022_2023, _ = load_data([DATA_2021,DATA_2022,DATA_2023], months)
+dlong, _ = load_data([DATA_2023], months)
+dfull, n = load_data([DATA_2022,DATA_2023], months)
+d2024, _ = load_data([DATA_2024], months)
+d2023, _ = load_data([DATA_2023], months)
+d2023_2024, _ = load_data([DATA_2023,DATA_2024],{1,2,3,4,5,6,7,8,9,10,11})
+d2024_dec, _ = load_data([DATA_2024_DEC],{12})
+
+d2019_2021_2022, _ = load_data([DATA_2019,DATA_2021,DATA_2022],months)
 
 
 predict_month = 12
 
-dtest = section(lambda x: x[1] in {predict_month}, d2023)
-dyears = section(lambda x: x[1] in {predict_month}, d2022)
-dmonths2 = section(lambda x: x[1] in {predict_month-2,predict_month-1}, d2023)
-dmonths4 = section(lambda x: x[1] in {predict_month}, dlong)
-dyears_months2 = section(lambda x: x[1] in {(predict_month+1)%12,predict_month-1}, dfull)
+dtest = section(lambda x: x[1] in {predict_month}, d2024_dec)
+dyears = section(lambda x: x[1] in {predict_month}, d2023)
+dmonths2 = section(lambda x: x[1] in {predict_month-1}, d2023_2024)
+dmonths4 = section(lambda x: x[1] in {predict_month-1}, dfull)
+dyears_months2 = section(lambda x: x[1] in {predict_month-1}, d2023_2024)
 
 
 nuclear        = extract_data_and_label(dyears,2,9)
 consum         = extract_data_and_label(dyears,2,3)
-hidrocarburi   = extract_data_and_label(section(lambda x: x[1] in {predict_month},d2019_2021_2022),2,7)
-ape            = extract_data_and_label(section(lambda x: x[1] in {predict_month},d2022),2,8)
 
-foto           = extract_data_and_label(section(lambda x: x[1] in {predict_month}, d2019_2021_2022),2,11)
+hidrocarburi   = extract_data_and_label(section(lambda x: x[1] in {predict_month},d2021_2022_2023),2,7)
+foto           = extract_data_and_label(section(lambda x: x[1] in {predict_month}, d2021_2022_2023),2,11)
+
+ape            = extract_data_and_label(section(lambda x: x[1] in {predict_month-1},d2024),2,8)
+
 
 carbune        = extract_data_and_label(dyears_months2,2,6)
-eolian         = extract_data_and_label(dmonths4,2,10)
+eolian         = extract_data_and_label(dmonths2,2,10)
 biomas         = extract_data_and_label(dmonths2,2,12)
 
 
