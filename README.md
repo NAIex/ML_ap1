@@ -1,4 +1,4 @@
-This small project was done for the Machine Learning course, form the 5th semester. The course is held at the Faculty of Computer Science from Iași. This structure is quite small:
+This small project was done for the Machine Learning course held in the 5th semester from the Faculty of Computer Science from Iași. This structure is quite small:
 - id3.py        : This file holds all the logic for the ID3 algorithm
 - data.py       : This file holds all the logic for reading excel files and extracting the data regarding the production and consumption of energy
 - attempt_1.py  : This file contains the attempt at predicting the production attributes.
